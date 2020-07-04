@@ -1,0 +1,40 @@
+﻿@model UniversidadContoso.Models.Instructor
+
+@{
+    ViewBag.Title = "Editar Instructor";
+}
+<h1>Editar Instructor</h1>
+
+@using (Html.BeginForm("EditarInstructor", "Instructor", FormMethod.Post))
+{
+    <div>
+        <div class="row">
+            <label class="col-sm-3">Id del instructor:</label>
+            <div class="col-sm-9 border">
+                @Html.EditorFor(model => model.ID_Instructor, new { htmlAttributes = new { @class = "form-control col-sm-12", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3">Nombre del instructor:</label>
+            <div class="col-sm-9 border">
+                @Html.EditorFor(model => model.Nombre_Instructor, new { htmlAttributes = new { @class = "form-control col-sm-12", required = "required" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3">Fecha de contratacion:</label>
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.DiaContrato_Instructor, new { htmlAttributes = new { @class = "form-control col-sm-12", required = "required" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Modificar" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<br />
+<div>
+    @Html.ActionLink("Volver a Instructores", "ListaInstructores")
+</div>

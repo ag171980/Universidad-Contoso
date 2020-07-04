@@ -1,0 +1,43 @@
+﻿@model UniversidadContoso.Models.Departamento
+
+@{
+    ViewBag.Title = "Editar Departamento";
+}
+
+    <div class="container" style="margin:10px; background-color:lightgray;border:2px solid black; border-radius:10px;">
+        <h1>Editar Departamento</h1>
+
+        @using (Html.BeginForm("EditarDepartamento", "Departamento", FormMethod.Post))
+        {
+            <div>
+                <div class="row">
+                    <label class="col-sm-3">Id:</label>
+                    <div class="col-sm-9 border">
+                        @Html.EditorFor(model => model.ID_Depto, new { htmlAttributes = new { @class = "form-control col-sm-12", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-3">Nombre:</label>
+                    <div class="col-sm-9 border">
+                        @Html.DisplayFor(model => model.Titulo_Depto, new { htmlAttributes = new { @class = "form-control col-sm-12", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-3">Descripcion:</label>
+                    <div class="col-sm-9">
+                        @Html.TextAreaFor(model => model.Descripcion_Depto, 10, 40, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <input type="submit" value="Editar" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+        <br />
+        <div>
+            @Html.ActionLink("Volver al listado", "ListaDepartamentos")
+        </div>
+    </div>

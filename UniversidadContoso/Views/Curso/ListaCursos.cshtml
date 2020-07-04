@@ -1,0 +1,72 @@
+﻿@model List<UniversidadContoso.Models.Curso>
+
+@{
+    ViewBag.Title = "Cursos";
+}
+<script src="https://kit.fontawesome.com/5b23b3e9e6.js" crossorigin="anonymous"></script>
+<style>
+    .buttonadd {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+<h1>Cursos</h1>
+@using (Html.BeginForm("SearchCurso", "Curso", FormMethod.Get))
+{
+    <div style="display:flex;flex-direction:row;">
+
+        @Html.TextBox("searchCursos")<br />
+
+        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+
+    </div>
+}
+<div>
+    
+
+    @if (Model.Count > 0)
+    {
+        @Html.ActionLink("+", "AgregarCurso", "Curso", null, new { @class = "btn btn-primary btn-large" })
+        <table class="table col-12">
+            <thead>
+                <tr class="row">
+                    <th class="col">Id</th>
+                    <th class="col-6">Nombre</th>
+                    <th class="col">Departamento</th>
+                    <th class="col">Capacidad</th>
+                    <th class="col">Instructor</th>
+                    <th class="col">Detalles</th>
+                    <th class="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cur in Model)
+                {
+                    int LugaresDisponibles = cur.Capacidad_Curso - cur.Alumno.Count();
+                <tr class="row">
+                    <td class="col">@cur.ID_Curso</td>
+                    <td class="col-6">@cur.Titulo_Curso</td>
+                    <td class="col"> @cur.Departamento.Titulo_Depto</td>
+                    <td class="col">@LugaresDisponibles / @cur.Capacidad_Curso</td>
+                    <td class="col">@cur.Instructor.Nombre_Instructor</td>
+                    <td class="col">
+                        @Html.Partial("Inscriptos", cur)
+                        @Html.Partial("Matricular", cur)
+                    </td>
+                    <td class="d-flex justify-content-around col">
+                        @Html.ActionLink("Editar", "EditarCurso", new { id = cur.ID_Curso }, new { @class = "btn btn-success" })
+                        <a href="@Url.Action("EliminarCurso", "Curso", cur)" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No se encontro ningun Curso.</p>
+    }
+
+
+</div>

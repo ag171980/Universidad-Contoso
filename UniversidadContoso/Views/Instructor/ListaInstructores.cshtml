@@ -1,0 +1,66 @@
+﻿@model List<UniversidadContoso.Models.Instructor>
+
+@{
+    ViewBag.Title = "Instructores";
+}
+    <script src="https://kit.fontawesome.com/5b23b3e9e6.js" crossorigin="anonymous"></script>
+<style>
+    .buttonadd {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+<div class="container" style="margin:10px; background-color:lightgray;border:2px solid black; border-radius:10px;">
+
+
+    <h1>Instructores</h1>
+    @using (Html.BeginForm("SearchInstructor", "Instructor", FormMethod.Get))
+    {
+        <div style="display:flex;flex-direction:row;">
+
+            @Html.TextBox("SearchInstructor")<br />
+
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+
+        </div>
+    }
+    <div>
+
+
+        @if (Model.Count > 0)
+        {
+            @Html.ActionLink("+", "AgregarInstructores", "Instructor", null, new { @class = "btn btn-primary btn-large" })
+            <table class="table col-12">
+                <thead>
+                    <tr class="row">
+                        <th class="col">Id</th>
+                        <th class="col-6">Nombre</th>
+                        <th class="col">Fecha De Contratacion</th>
+                        <th class="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ins in Model)
+                    {
+                        <tr class="row">
+                            <td class="col">@ins.ID_Instructor</td>
+                            <td class="col-6">@ins.Nombre_Instructor</td>
+                            <td class="col">@ins.DiaContrato_Instructor</td>
+                            <td class="d-flex justify-content-around col">
+                                @Html.ActionLink("Editar", "EditarInstructores", new { id = ins.ID_Instructor }, new { @class = "btn btn-success" })
+                                @Html.Partial("Borrar", ins.ID_Instructor)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No se encontro ningun Instructor.</p>
+        }
+
+
+    </div>
+</div>

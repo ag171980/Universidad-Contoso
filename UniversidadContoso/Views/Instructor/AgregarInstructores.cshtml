@@ -1,0 +1,36 @@
+﻿@model UniversidadContoso.Models.Instructor
+
+@{
+    ViewBag.Title = "Añadir Instructor";
+}
+    <div class="container" style="margin:10px; background-color:lightgray;border:2px solid black; border-radius:10px;">
+        <h1>Agregar Instructor</h1>
+
+        @using (Html.BeginForm("CrearInstructor", "Instructor", FormMethod.Post))
+        {
+            <div>
+                <div class="row">
+                    <label class="col-sm-3">Nombre:</label>
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Nombre_Instructor, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-3">Fecha de Contratacion:</label>
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.DiaContrato_Instructor, new { htmlAttributes = new { @class = "form-control", requried = "required" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <input type="submit" value="Crear Instructor" class="btn btn-success" />
+                    @Html.ActionLink("Limpiar", "AgregarInstructores", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        }
+        <br />
+        <div>
+            @Html.ActionLink("Volver a Instructores", "ListaInstructores")
+        </div>
+    </div>

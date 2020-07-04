@@ -1,0 +1,36 @@
+﻿@model UniversidadContoso.Models.Curso
+
+@{
+    ViewBag.Title = "Agregar Curso";
+}
+<h1>Agregar Curso</h1>
+
+@using (Html.BeginForm("CrearCurso", "Curso", FormMethod.Post))
+{
+<div>
+    <div class="row">
+        <label class="col-3">Departamento</label>
+        @Html.DropDownListFor(model => model.DepartamentoID_Depto, new SelectList(ViewBag.Departamentos, "ID_Depto", "Titulo_Depto"), "- Elija un Departamento -", htmlAttributes: new { @class = "form-control col-6", required = "required" })
+    </div>
+
+    <div class="row">
+        <label class="col-3">Nombre:</label>
+        @Html.EditorFor(model => model.Titulo_Curso, new { htmlAttributes = new { @class = "form-control col-6", required = "required" } })
+    </div>
+
+    <div class="row">
+        <label class="col-3">Capacidad:</label>
+        @Html.EditorFor(model => model.Capacidad_Curso, new { htmlAttributes = new { @class = "form-control col-6", required = "required" } })
+    </div>
+    
+    <div class="row">
+        <label class="col-3">Instructor</label>
+        @Html.DropDownListFor(model => model.InstructorID_Instructor, new SelectList(ViewBag.Instructores, "ID_Instructor", "Nombre_Instructor"), "- Elija un Instructor -", htmlAttributes: new { @class = "form-control col-6", required = "required" })
+    </div>
+        
+    <div class="row">
+        <input type="submit" value="Crear Curso" class="btn btn-outline-primary" />
+        @Html.ActionLink("Limpiar", "AgregarCurso", null, new { @class = "btn btn-outline-danger" })
+    </div>
+</div>
+}

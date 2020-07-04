@@ -1,0 +1,59 @@
+﻿@model List<UniversidadContoso.Models.Departamento>
+@{
+    ViewBag.Title = "Lista de Departamentos";
+}
+<script src="https://kit.fontawesome.com/5b23b3e9e6.js" crossorigin="anonymous"></script>
+<style>
+    .buttonadd {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
+    <div class="container" style="margin:10px; background-color:lightgray;border:2px solid black; border-radius:10px;">
+        <h1>Lista de Departamentos</h1>
+        @using (Html.BeginForm("SearchDepto", "Departamento", FormMethod.Get))
+        {
+            <div style="display:flex;flex-direction:row;">
+
+                @Html.TextBox("searchDepto")<br />
+
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+
+            </div>
+        }
+        @if (Model != null)
+        {
+            @Html.ActionLink("+", "FormDepto", "Departamento", null, new { @class = "btn btn-primary btn-large" })
+            <table class="table bg-info"  >
+                <thead style="text-align:center;">
+                    <tr style="font-size:21px;">
+                        <th scope="col">ID</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var dep in Model)
+                    {
+                        <tr>
+                            <td>@dep.ID_Depto</td>
+                            <td>@dep.Titulo_Depto</td>
+                            <td>@dep.Descripcion_Depto</td>
+                            <td>
+                                @Html.ActionLink("Editar", "EditarDepto", new { id = dep.ID_Depto }, new { @class = "btn btn-success" })
+                                @Html.Partial("Borrar", dep.ID_Depto)
+                            </td>
+
+                            <!--<td><a href="#" class="btn btn-success"><span>Editar</span></a>        <a href="#" class="btn btn-danger"><span>Eliminar</span></a></td>-->
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        }
+    </div>

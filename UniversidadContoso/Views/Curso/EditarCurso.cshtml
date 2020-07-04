@@ -1,0 +1,50 @@
+﻿@model UniversidadContoso.Models.Curso
+
+@{
+    ViewBag.Title = "Editar Curso";
+}
+<h1>Editar Curso.</h1>
+
+@using (Html.BeginForm("ModificarCurso", "Curso", FormMethod.Post))
+{
+    <div>
+        <div class="row">
+            <label class="col-sm-3">Id:</label>
+            <div class="col-sm-9 border">
+                @Html.EditorFor(model => model.ID_Curso, new { htmlAttributes = new { @class = "form-control col-sm-12", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3">Departamento:</label>
+            <div class="col-sm-9 border">
+                @Html.EditorFor(model => model.Departamento.Titulo_Depto, new { htmlAttributes = new { @class = "form-control col-sm-12", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3">Titulo:</label>
+            <div class="col-sm-9 border">
+                @Html.EditorFor(model => model.Titulo_Curso, new { htmlAttributes = new { @class = "form-control col-sm-12", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3">Capacidad:</label>
+            <div class="col-sm-9 border">
+                @Html.EditorFor(model => model.Capacidad_Curso, new { htmlAttributes = new { @class = "form-control col-sm-12", required = "required" } })
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3">Instructor:</label>
+            <div class="col-sm-9 border">
+                @Html.DropDownListFor(model => model.InstructorID_Instructor, new SelectList(ViewBag.Instructores, "ID_Instructor", "Nombre_Instructor"), htmlAttributes: new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Modificar Departamento" class="btn btn-outline-primary" />
+        </div>
+    </div>
+}
